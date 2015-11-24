@@ -1,4 +1,4 @@
-package corehttp
+package gateway
 
 import (
 	"fmt"
@@ -26,6 +26,22 @@ func NewGateway(conf GatewayConfig) *Gateway {
 	return &Gateway{
 		Config: conf,
 	}
+}
+
+// extracted from github.com/ipfs/go-ipfs/core/corehttp/corehttp.go
+// makeHandler turns a list of ServeOptions into a http.Handler that implements
+// all of the given options, in order.
+func makeHandler(n *core.IpfsNode, l net.Listener, options ...corehttp.ServeOption) (http.Handler, error) {
+	topMux := http.NewServeMux()
+	mux := topMux
+	for _, option := range options {
+		var err error
+		mux, err = option(n, l, mux)
+		if err != nil {
+			return nil, err
+		}
+	}
+	return topMux, nil
 }
 
 func (g *Gateway) ServeOption() corehttp.ServeOption {
