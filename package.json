@@ -1,0 +1,13 @@
+{
+  "name": "go-ipfs",
+  "version": "0.3.8",
+  "gxDependencies": [
+    {
+      "name": "dir-index-html",
+      "hash": "QmS4H4p9y44ywn36REtxUsv5ssft8xVBchcwx18cZ8BTcv",
+      "version": "1.0.0",
+      "linkname": "dir-index-html-v1.0.0"
+    }
+  ],
+  "language": "go"
+}
